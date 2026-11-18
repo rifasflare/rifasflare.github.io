@@ -1,7 +1,9 @@
-# Rifa
+# Mohamed Rifas
 
-A simple one-page website, hosted with GitHub Pages.
+Personal portfolio.
 
 Live site: https://rifasflare.github.io/
 
-Edit `index.html` and push to `main`. The page updates on its own.
+LinkedIn: https://www.linkedin.com/in/mohamed-rifas-631a60268
+
+Edit `index.html` and push to `main`.

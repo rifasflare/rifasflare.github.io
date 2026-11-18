@@ -3,373 +3,262 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rifa</title>
+    <title>Mohamed Rifas — Portfolio</title>
     <meta
       name="description"
-      content="A simple one-page website for rifasflare, hosted on GitHub Pages."
+      content="Portfolio of Mohamed Rifas. Web software, how this site is built, and links to GitHub and LinkedIn."
     />
-    <meta name="theme-color" content="#f3eee6" />
+    <meta name="theme-color" content="#f6f7f9" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:opsz,wght@9..144,520;9..144,620&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --paper: #f3eee6;
-        --ink: #1b1814;
-        --clay: #c2542a;
-        --mist: #6f675e;
-        --line: #e3d9cc;
-        --card: #faf7f2;
-        --sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
-        --display: "Fraunces", Georgia, "Times New Roman", serif;
+        --canvas: #f6f7f9;
+        --ink: #12151c;
+        --mute: #5c6570;
+        --line: #e4e7ec;
+        --card: #ffffff;
+        --accent: #1d4ed8;
+        --onaccent: #f7f8fb;
+        --sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, monospace;
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font-family: var(--sans);
-        line-height: 1.5;
-      }
+      body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
       a { color: inherit; }
       button { font: inherit; color: inherit; cursor: pointer; }
-      :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
-      .topbar, .drawer { display: none; }
-      .rail {
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: 18rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 2.5rem 2rem;
-        border-right: 1px solid var(--line);
-        background: var(--paper);
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      header { position: sticky; top: 0; z-index: 2; background: var(--canvas); border-bottom: 1px solid var(--line); }
+      .bar, .wrap { max-width: 64rem; margin: 0 auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+      .bar { height: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+      .brand { font-weight: 700; text-decoration: none; }
+      .nav { display: flex; gap: 1.5rem; color: var(--mute); font-size: 0.95rem; }
+      .nav a { text-decoration: none; }
+      .nav a:hover { color: var(--ink); }
+      .btn {
+        display: inline-flex; align-items: center; height: 2.75rem; padding: 0 1rem;
+        border-radius: 0.375rem; text-decoration: none; font-size: 0.95rem; font-weight: 600;
+        border: 1px solid transparent;
       }
-      .wordmark {
-        font-family: var(--display);
-        font-size: 3rem;
-        letter-spacing: -0.03em;
-        text-decoration: none;
-        line-height: 1;
+      .btn.solid { background: var(--accent); color: var(--onaccent); }
+      .btn.ghost { background: var(--card); border-color: var(--line); }
+      .menu { display: none; width: 2.75rem; height: 2.75rem; border-radius: 0.375rem; border: 1px solid var(--line); background: var(--card); }
+      .drawer { display: none; border-top: 1px solid var(--line); padding: 0.5rem 1.25rem 0.75rem; }
+      .drawer a { display: flex; align-items: center; height: 2.75rem; text-decoration: none; }
+      .wrap { padding-top: 3rem; padding-bottom: 4rem; display: flex; flex-direction: column; gap: 4.5rem; }
+      .hero { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 2rem; align-items: end; }
+      .kicker { margin: 0; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+      h1 { margin: 0.6rem 0 0; font-size: clamp(2.2rem, 5vw, 3rem); letter-spacing: -0.03em; line-height: 1.1; }
+      h2 { margin: 0; font-size: 1.5rem; letter-spacing: -0.02em; }
+      .lede { max-width: 38rem; color: var(--mute); font-size: 1.15rem; }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 0.5rem; }
+      .profile { padding: 0.4rem 1.15rem 0.9rem; }
+      .profile div { padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+      .profile div:last-child { border-bottom: 0; padding-bottom: 0; }
+      .label { display: block; color: var(--mute); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+      .value { display: block; margin-top: 0.15rem; font-weight: 600; font-size: 0.95rem; }
+      .about { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; }
+      .about h2 { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+      .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
+      .filters, .layers { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .filters button, .layers button {
+        height: 2.75rem; padding: 0 1rem; border-radius: 0.375rem; border: 1px solid var(--line);
+        background: var(--card); font-weight: 600; font-size: 0.95rem;
       }
-      .rail p.blurb { margin: 0.8rem 0 0; max-width: 11rem; color: var(--mist); font-size: 0.9rem; }
-      .rail nav, .drawer nav { display: flex; flex-direction: column; gap: 0.75rem; }
-      .rail nav a, .drawer nav a { text-decoration: none; }
-      .rail nav a:hover { color: var(--clay); }
-      .kicker {
-        margin: 0;
-        color: var(--clay);
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+      .filters button[aria-pressed="true"], .layers button[aria-selected="true"] {
+        background: var(--ink); color: var(--onaccent); border-color: var(--ink);
       }
-      .clock-label {
-        display: block;
-        color: var(--mist);
-        font-size: 0.72rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-      .clock {
-        display: block;
-        margin-top: 0.25rem;
-        font-family: var(--display);
-        font-size: 1.6rem;
-        letter-spacing: -0.03em;
-        font-variant-numeric: tabular-nums;
-      }
-      main { margin-left: 18rem; }
-      .wrap {
-        max-width: 46rem;
-        margin: 0 auto;
-        padding: 4rem 3.5rem 5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 5rem;
-      }
-      h1 {
-        margin: 1rem 0 0;
-        max-width: 16ch;
-        font-family: var(--display);
-        font-weight: 520;
-        font-size: clamp(2.8rem, 6vw, 4.6rem);
-        line-height: 0.95;
-        letter-spacing: -0.03em;
-      }
-      h2 {
-        margin: 0.4rem 0 0;
-        font-family: var(--display);
-        font-weight: 520;
-        font-size: 2.2rem;
-        letter-spacing: -0.03em;
-      }
-      .lede { max-width: 38rem; color: var(--mist); font-size: 1.125rem; }
-      .facts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.75rem;
-        margin: 0;
-        padding: 1.25rem 0;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-      }
-      .facts dt {
-        color: var(--mist);
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-      .facts dd {
-        margin: 0.2rem 0 0;
-        font-family: var(--display);
-        font-size: 1.8rem;
-        letter-spacing: -0.03em;
-      }
-      .section-head {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-      .filters { display: flex; gap: 0.5rem; }
-      .filters button {
-        height: 2.75rem;
-        padding: 0 1rem;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: var(--card);
-      }
-      .filters button[aria-pressed="true"] {
-        background: var(--ink);
-        color: var(--paper);
-        border-color: var(--ink);
-      }
-      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
-      .card {
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-        padding: 1.5rem;
-        border: 1px solid var(--line);
-        border-radius: 1rem;
-        background: var(--card);
-      }
-      .card .tag {
-        margin: 0;
-        color: var(--clay);
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-      .card h3 { margin: 0; font-family: var(--display); font-size: 1.5rem; font-weight: 520; letter-spacing: -0.02em; }
-      .card p { margin: 0; color: var(--mist); font-size: 0.92rem; }
-      .visit {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 1.5rem;
-        padding: 2rem;
-        border-radius: 1rem;
-        background: var(--ink);
-        color: var(--paper);
-        text-decoration: none;
-      }
-      .visit strong {
-        display: block;
-        font-family: var(--display);
-        font-weight: 520;
-        font-size: clamp(1.8rem, 3vw, 2.4rem);
-        letter-spacing: -0.03em;
-      }
-      .visit span { display: block; margin-top: 0.4rem; color: var(--line); font-size: 0.9rem; }
-      .visit svg { flex: none; }
-      .repo {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        height: 2.75rem;
-        font-size: 0.92rem;
-        font-weight: 600;
-        text-underline-offset: 4px;
+      .project { padding: 1.25rem 1.35rem; margin-top: 1rem; }
+      .project-top { display: flex; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; align-items: baseline; }
+      .meta { margin: 0; font-family: var(--mono); font-size: 0.75rem; color: var(--mute); }
+      .summary { color: var(--mute); max-width: 42rem; }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0 0; padding: 0; list-style: none; }
+      .chips li { font-family: var(--mono); font-size: 0.75rem; border: 1px solid var(--line); background: var(--canvas); border-radius: 0.375rem; padding: 0.2rem 0.45rem; }
+      .points { margin: 0.9rem 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.95rem; }
+      .points li { border-left: 2px solid var(--line); padding-left: 0.75rem; }
+      .system { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .layers { flex-direction: column; align-items: stretch; margin-top: 1rem; }
+      .layers button { text-align: left; }
+      .path { font-family: var(--mono); font-size: 0.75rem; color: var(--mute); }
+      .panel { padding: 1.25rem; }
+      .stack { margin-top: 1.25rem; }
+      .stack-row { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem; font-size: 0.95rem; padding: 0.35rem 0; }
+      .contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+      .contact {
+        display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+        padding: 1rem 1rem; text-decoration: none;
       }
       section { scroll-margin-top: 5rem; }
+      #contact { border-top: 1px solid var(--line); padding-top: 2rem; }
       @media (max-width: 800px) {
-        .rail { display: none; }
-        .topbar {
-          display: flex;
-          position: sticky;
-          top: 0;
-          z-index: 2;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0.75rem 1.25rem;
-          border-bottom: 1px solid var(--line);
-          background: var(--paper);
-        }
-        .menu-btn {
-          width: 2.75rem;
-          height: 2.75rem;
-          border-radius: 999px;
-          border: 1px solid var(--line);
-          background: transparent;
-        }
-        .drawer.open {
-          display: block;
-          padding: 0.5rem 1.25rem 1rem;
-          border-bottom: 1px solid var(--line);
-        }
-        .drawer nav a { display: flex; align-items: center; height: 2.75rem; font-size: 1.1rem; text-decoration: none; }
-        main { margin-left: 0; }
-        .wrap { padding: 2.5rem 1.25rem 3rem; gap: 3.5rem; }
-        .grid { grid-template-columns: 1fr; }
-        .facts dd { font-size: 1.45rem; }
+        .nav, .desk-link { display: none; }
+        .menu { display: grid; place-items: center; }
+        .drawer.open { display: block; }
+        .hero, .about, .system, .contacts { grid-template-columns: 1fr; }
+        .wrap { gap: 3rem; }
       }
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     </style>
   </head>
   <body>
-    <header class="topbar">
-      <a class="wordmark" href="#top" style="font-size: 1.8rem">rifa</a>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-label="Open menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      </button>
-    </header>
-    <div class="drawer" id="drawer">
-      <nav>
-        <a href="#notes">Notes</a>
-        <a href="#visit">Visit</a>
-        <a href="https://github.com/rifasflare/rifasflare.github.io">GitHub</a>
-      </nav>
-      <p>
-        <span class="clock-label">Your time</span>
-        <span class="clock" data-clock>--:--</span>
-      </p>
-    </div>
-
-    <aside class="rail">
-      <div>
-        <a class="wordmark" href="#top">rifa</a>
-        <p class="blurb">A one-page site, hosted on GitHub.</p>
-      </div>
-      <div>
-        <nav>
-          <a href="#notes">Notes</a>
-          <a href="#visit">Visit</a>
-          <a href="https://github.com/rifasflare/rifasflare.github.io">GitHub</a>
+    <header>
+      <div class="bar">
+        <a class="brand" href="#top">Mohamed Rifas</a>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#system">System</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <p style="margin-top: 2.5rem">
-          <span class="clock-label">Your time</span>
-          <span class="clock" data-clock>--:--</span>
-        </p>
+        <a class="btn solid desk-link" href="https://www.linkedin.com/in/mohamed-rifas-631a60268">LinkedIn</a>
+        <button class="menu" type="button" aria-expanded="false" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
-    </aside>
-
-    <main id="top">
-      <div class="wrap">
-        <section>
-          <p class="kicker">01 — Hello</p>
-          <h1>A simple website, hosted on GitHub.</h1>
-          <p class="lede">
-            This is a starter homepage for <strong style="color: var(--ink); font-weight: 600">rifasflare</strong>.
-            It is one public file. Change a sentence, push to GitHub, and the site follows.
-          </p>
-          <dl class="facts">
-            <div><dt>Pages</dt><dd>1</dd></div>
-            <div><dt>Stack</dt><dd>HTML</dd></div>
-            <div><dt>Status</dt><dd>Public</dd></div>
-          </dl>
-        </section>
-
-        <section id="notes">
-          <div class="section-head">
-            <div>
-              <p class="kicker">02 — Notes</p>
-              <h2>Small things to keep</h2>
-            </div>
-            <div class="filters" role="group" aria-label="Filter notes">
-              <button type="button" data-filter="All" aria-pressed="true">All</button>
-              <button type="button" data-filter="Making" aria-pressed="false">Making</button>
-              <button type="button" data-filter="Reading" aria-pressed="false">Reading</button>
-            </div>
+      <div class="drawer" id="drawer">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#system">System</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.linkedin.com/in/mohamed-rifas-631a60268">LinkedIn</a>
+      </div>
+    </header>
+    <main class="wrap" id="top">
+      <section class="hero">
+        <div>
+          <p class="kicker">Portfolio</p>
+          <h1>Mohamed Rifas</h1>
+          <p class="lede">I build software for the web. This site is the public record: what I can link, how it is put together, and where to reach me.</p>
+          <div class="actions">
+            <a class="btn solid" href="#work">View work</a>
+            <a class="btn ghost" href="https://github.com/rifasflare">GitHub</a>
           </div>
-          <ul class="grid" id="notes-list"></ul>
-        </section>
+        </div>
+        <dl class="card profile">
+          <div><dt class="label">Name</dt><dd class="value">Mohamed Rifas</dd></div>
+          <div><dt class="label">GitHub</dt><dd class="value">@rifasflare</dd></div>
+          <div><dt class="label">Site</dt><dd class="value">rifasflare.github.io</dd></div>
+          <div><dt class="label">Profile</dt><dd class="value"><a href="https://www.linkedin.com/in/mohamed-rifas-631a60268">LinkedIn</a></dd></div>
+        </dl>
+      </section>
 
-        <section id="visit">
-          <p class="kicker">03 — Visit</p>
-          <a class="visit" href="https://github.com/rifasflare/rifasflare.github.io">
-            <span>
-              <strong>Open the repository</strong>
-              <span>github.com/rifasflare/rifasflare.github.io</span>
-            </span>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-              <path d="M7 17 17 7M9 7h8v8" />
-            </svg>
-          </a>
-          <p class="lede" style="margin-top: 1rem">
-            You are already on the live site. The source is the link above — edit
-            <code>index.html</code> and commit.
-          </p>
-        </section>
-      </div>
+      <section class="about" id="about">
+        <h2>About</h2>
+        <div>
+          <p>I am Mohamed Rifas. I care about the part of software a person actually touches, and about the path that gets that software onto the web without extra machinery.</p>
+          <p class="lede">Work history stays on <a href="https://www.linkedin.com/in/mohamed-rifas-631a60268"><strong>LinkedIn</strong></a>. This page does not guess at roles or dates. What is here is the site itself, the release process, and the stack used to ship it.</p>
+        </div>
+      </section>
+
+      <section id="work">
+        <div class="section-head">
+          <h2>Work</h2>
+          <div class="filters" role="group" aria-label="Filter work">
+            <button type="button" data-area="All" aria-pressed="true">All</button>
+            <button type="button" data-area="Sites" aria-pressed="false">Sites</button>
+            <button type="button" data-area="Systems" aria-pressed="false">Systems</button>
+          </div>
+        </div>
+        <div id="projects"></div>
+      </section>
+
+      <section class="system" id="system">
+        <div>
+          <h2>System</h2>
+          <p class="lede">Three layers. Select one to read what it is responsible for.</p>
+          <div class="layers" role="tablist" aria-label="System layers">
+            <button type="button" role="tab" data-layer="interface" aria-selected="true">Interface</button>
+            <button type="button" role="tab" data-layer="application" aria-selected="false">Application</button>
+            <button type="button" role="tab" data-layer="hosting" aria-selected="false">Hosting</button>
+          </div>
+          <p class="path">main → GitHub Pages → rifasflare.github.io</p>
+        </div>
+        <div>
+          <div class="card panel" role="tabpanel">
+            <p class="kicker" id="layer-name">Interface</p>
+            <p id="layer-detail">A normal document: header, about, work, system, contact. The mobile menu is a button with an expanded state. Hit targets stay at 44px.</p>
+          </div>
+          <div class="stack">
+            <h3 class="label">Stack</h3>
+            <div class="stack-row"><span>Language</span><span>TypeScript, HTML, CSS</span></div>
+            <div class="stack-row"><span>Interface</span><span>React, Tailwind</span></div>
+            <div class="stack-row"><span>Delivery</span><span>Git, GitHub, GitHub Pages</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p class="lede">The useful links are the ones that already exist. LinkedIn for the profile, GitHub for the code.</p>
+        <div class="contacts">
+          <a class="card contact" href="https://www.linkedin.com/in/mohamed-rifas-631a60268"><span><span class="label">LinkedIn</span><span class="value">mohamed-rifas</span></span><span aria-hidden="true">↗</span></a>
+          <a class="card contact" href="https://github.com/rifasflare"><span><span class="label">GitHub</span><span class="value">rifasflare</span></span><span aria-hidden="true">↗</span></a>
+          <a class="card contact" href="https://rifasflare.github.io/"><span><span class="label">Live site</span><span class="value">rifasflare.github.io</span></span><span aria-hidden="true">↗</span></a>
+          <a class="card contact" href="https://github.com/rifasflare/rifasflare.github.io"><span><span class="label">Source</span><span class="value">repository</span></span><span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
     </main>
-
     <script>
-      const notes = [
-        ["Making", "One file is enough", "This page is a single HTML file in a public repository. No build, no server. Edit it, push, and GitHub Pages updates."],
-        ["Reading", "Say it in a breath", "A homepage should introduce you before the scroll ends. Swap these cards for projects, a menu, or a short journal."],
-        ["Making", "Three colors, then stop", "Paper, ink, and a clay accent. Change those at the top of the stylesheet and the whole page follows."],
-        ["Reading", "Start with the name", "Rifa is a placeholder you can keep or replace. The layout stays: a quiet rail, a few notes, and a way to find you."]
+      const projects = [
+        ["Sites", "Personal portfolio", "2026", "This page. A public about site with project notes, a system breakdown, and direct links to LinkedIn and GitHub.", ["TypeScript", "React", "Tailwind"], ["One home page. Filters and the system panel are local state.", "Color and type live in a single stylesheet.", "The same copy is published as static HTML so the public URL does not need a build."]],
+        ["Systems", "GitHub Pages release", "2026", "The live site is the repository rifasflare.github.io. Pushing main is the release. There is no extra server.", ["HTML", "Git", "GitHub Pages"], ["index.html at the repository root is the file Pages serves.", "A .nojekyll file keeps the host from rewriting the page.", "The public address is rifasflare.github.io."]],
+        ["Sites", "Profile links", "2026", "Contact stays on the profiles I already use. This site does not collect a form or store messages.", ["LinkedIn", "GitHub"], ["LinkedIn is the full profile.", "GitHub holds the source for this site under rifasflare.", "Both links are in the header and the contact section."]]
       ];
-      const list = document.getElementById("notes-list");
-      function render(filter) {
-        list.replaceChildren();
-        notes.filter((n) => filter === "All" || n[0] === filter).forEach(([tag, title, body]) => {
-          const li = document.createElement("li");
-          li.className = "card";
-          li.innerHTML = "<p class='tag'></p><h3></h3><p class='body'></p>";
-          li.querySelector(".tag").textContent = tag;
-          li.querySelector("h3").textContent = title;
-          li.querySelector(".body").textContent = body;
-          list.appendChild(li);
+      const layers = {
+        interface: ["Interface", "A normal document: header, about, work, system, contact. The mobile menu is a button with an expanded state. Hit targets stay at 44px."],
+        application: ["Application", "The page is static HTML with a short script. The work filter and the system selector update the document in the browser. No account, no database, no request on load besides the page itself."],
+        hosting: ["Hosting", "GitHub Pages publishes the main branch of rifasflare/rifasflare.github.io. The browser loads index.html. A change is a commit, then a push."]
+      };
+      const root = document.getElementById("projects");
+      function render(area) {
+        root.replaceChildren();
+        projects.filter((p) => area === "All" || p[0] === area).forEach((p) => {
+          const article = document.createElement("article");
+          article.className = "card project";
+          const chips = p[4].map((item) => "<li></li>").join("");
+          article.innerHTML = "<div class='project-top'><h3></h3><p class='meta'></p></div><p class='summary'></p><ul class='chips'>" + chips + "</ul><ul class='points'></ul>";
+          article.querySelector("h3").textContent = p[1];
+          article.querySelector(".meta").textContent = p[0] + " · " + p[2];
+          article.querySelector(".summary").textContent = p[3];
+          article.querySelectorAll(".chips li").forEach((li, i) => { li.textContent = p[4][i]; });
+          p[5].forEach((point) => {
+            const li = document.createElement("li");
+            li.textContent = point;
+            article.querySelector(".points").appendChild(li);
+          });
+          root.appendChild(article);
         });
       }
       render("All");
-      document.querySelectorAll("[data-filter]").forEach((button) => {
+      document.querySelectorAll("[data-area]").forEach((button) => {
         button.addEventListener("click", () => {
-          document.querySelectorAll("[data-filter]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+          document.querySelectorAll("[data-area]").forEach((b) => b.setAttribute("aria-pressed", "false"));
           button.setAttribute("aria-pressed", "true");
-          render(button.dataset.filter);
+          render(button.dataset.area);
         });
       });
-      function tick() {
-        const text = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-        document.querySelectorAll("[data-clock]").forEach((el) => { el.textContent = text; });
-      }
-      tick();
-      setInterval(tick, 30000);
+      document.querySelectorAll("[data-layer]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-selected", "false"));
+          button.setAttribute("aria-selected", "true");
+          const data = layers[button.dataset.layer];
+          document.getElementById("layer-name").textContent = data[0];
+          document.getElementById("layer-detail").textContent = data[1];
+        });
+      });
       const drawer = document.getElementById("drawer");
-      const menu = document.querySelector(".menu-btn");
+      const menu = document.querySelector(".menu");
       menu.addEventListener("click", () => {
-        const open = drawer.classList.toggle("open");
-        menu.setAttribute("aria-expanded", String(open));
-        menu.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-        menu.innerHTML = open
-          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'
-          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+        const next = drawer.classList.toggle("open");
+        menu.setAttribute("aria-expanded", String(next));
+        menu.setAttribute("aria-label", next ? "Close menu" : "Open menu");
       });
       drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
         drawer.classList.remove("open");
